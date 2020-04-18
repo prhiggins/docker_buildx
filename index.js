@@ -50,13 +50,12 @@ async function buildAndPublish(platform, imageName, imageTag, dockerFile, buildA
     const dockerHubUser = extractInput('dockerHubUser', true);
     const dockerHubPassword = extractInput('dockerHubPassword', true);
     await executeShellScript('dockerhub_login', dockerHubUser, dockerHubPassword);
-	await executeShellScript('cd', buildContext)
     await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, true, buildArg);
 }
 
 async function buildOnly(platform, imageName, imageTag, dockerFile, buildArg) {
 	await executeShellScript('cd', buildContext)
-    await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, false, buildArg);
+    await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, false, buildArg, buildContext);
 }
 
 function cloneMyself() {

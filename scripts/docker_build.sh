@@ -18,4 +18,5 @@ do
     BUILD_ARGS="$BUILD_ARGS --build-arg $ARG"
 done
 
+cd $7
 docker buildx build --platform $1 $PUSH $TAGS $BUILD_ARGS -f $4 .
