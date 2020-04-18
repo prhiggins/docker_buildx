@@ -58,7 +58,7 @@ async function buildOnly(platform, imageName, imageTag, dockerFile, buildArg, bu
 }
 
 function cloneMyself() {
-    child_process.execSync(`git clone https://github.com/ilteoood/docker_buildx`);
+    child_process.execSync(`git clone https://github.com/prhiggins/docker_buildx`);
 }
 
 function cleanMyself() {
