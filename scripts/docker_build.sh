@@ -19,5 +19,4 @@ do
 done
 
 cd $7
-echo pwd
 docker buildx build --platform $1 $PUSH $TAGS $BUILD_ARGS -f $4 .
