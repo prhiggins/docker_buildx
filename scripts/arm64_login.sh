@@ -1,2 +1,3 @@
 #!/bin/sh -l
-docker context create python-arm64 --docker host=ssh://$1
+ARM64_DEVICE_ADDR = $1
+docker context create python-arm64 --docker host=ssh://ARM64_DEVICE_ADDR
