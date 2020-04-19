@@ -50,19 +50,17 @@ async function buildAndPublish(platform, imageName, imageTag, dockerFile, buildA
     const dockerHubUser = extractInput('dockerHubUser', true);
     const dockerHubPassword = extractInput('dockerHubPassword', true);
 
-	const access_key = extractInput('arm64_ssh_key', true)
 	const arm64_host = extractInput('arm64_host', true)
 
-	await executeShellScript('arm64_login', access_key, arm64_host)
+	await executeShellScript('arm64_login', arm64_host)
     await executeShellScript('dockerhub_login', dockerHubUser, dockerHubPassword);
     await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, true, buildArg, buildContext);
 }
 
 async function buildOnly(platform, imageName, imageTag, dockerFile, buildArg, buildContext) {
-	const access_key = extractInput('arm64_ssh_key', true)
 	const arm64_host = extractInput('arm64_host', true)
 
-	await executeShellScript('arm64_login', access_key, arm64_host)
+	await executeShellScript('arm64_login', arm64_host)
     await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, false, buildArg, buildContext);
 }
 
