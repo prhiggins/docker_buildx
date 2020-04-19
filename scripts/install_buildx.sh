@@ -18,6 +18,11 @@ chmod a+x ~/.docker/cli-plugins/docker-buildx
 # Register Multiarch executables
 # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
+ARM64_HOSTNAME=$1
+echo $ARM64_HOSTNAME
+docker context create python-arm64 --docker host=ssh://$ARM64_HOSTNAME
+echo "Created context"
+
 # Create builder instance
 docker buildx create --name actions_builder --use
 docker buildx create --append --name actions_builder python-arm64

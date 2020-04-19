@@ -7,7 +7,8 @@ async function docker_buildx() {
         checkPlatform();
         cloneMyself();
         const imageName = extractInput('imageName', true);
-        await executeShellScript('install_buildx');
+		const arm64_host = extractInput('arm64_host', true)
+        await executeShellScript('install_buildx', arm64_host);
 		const buildContext = extractInput('context', false, '.')
         const imageTag = extractInput('tag', false, 'latest');
         const dockerFile = extractInput('dockerFile', false, 'Dockerfile');
@@ -50,17 +51,12 @@ async function buildAndPublish(platform, imageName, imageTag, dockerFile, buildA
     const dockerHubUser = extractInput('dockerHubUser', true);
     const dockerHubPassword = extractInput('dockerHubPassword', true);
 
-	const arm64_host = extractInput('arm64_host', true)
-
-	await executeShellScript('arm64_login', arm64_host)
     await executeShellScript('dockerhub_login', dockerHubUser, dockerHubPassword);
     await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, true, buildArg, buildContext);
 }
 
 async function buildOnly(platform, imageName, imageTag, dockerFile, buildArg, buildContext) {
-	const arm64_host = extractInput('arm64_host', true)
 
-	await executeShellScript('arm64_login', arm64_host)
     await executeShellScript('docker_build', platform, imageName, imageTag, dockerFile, false, buildArg, buildContext);
 }
 
