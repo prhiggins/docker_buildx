@@ -29,6 +29,10 @@ inputs:
         description: "User that will publish the image, if indicated"
     dockerHubPassword:
         description: "Password of the dockerHubUser"
+    arm64_ssh_key:
+        description: "The ssh key to use to connect to the arm host"
+    arm64_host:
+        description: "The arm64 host"
 runs:
     using: 'node12'
     main: index.js
